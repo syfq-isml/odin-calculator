@@ -38,8 +38,12 @@ let displayNumbers = document.getElementById('display-numbers');
 
 let numberArray = [];
 let number;
+let result;
 let btns = document.querySelectorAll('button');
 btns.forEach((btn) => btn.addEventListener("click", makeNumberArray));
+
+// let btnsOperators = document.querySelectorAll('button.operators');
+// btnsOperators.forEach((btn) => btn.addEventListener('click', takeOperator));
 
 // function(e) {
     
@@ -66,3 +70,31 @@ function showNumber() { //change array into string and print on display
     displayNumbers.innerHTML = number;
     console.log(number);
 }
+
+function takeOperator(e) {
+
+}
+
+
+/* PLANNING
+
+(using 1 array)
+take number
+put into array
+print number
+IF operator is chosen
+    clear screen when next number button is pressed
+    store operator (1)
+    take number
+    put into array
+    IF equals is chosen
+        calculate result (operate)
+        clear screen
+        print result
+    IF another operator is chosen
+        calculate result (operate)
+        clear screen
+        print result
+        loop back to (1)
+
+*/
