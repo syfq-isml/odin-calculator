@@ -1,28 +1,29 @@
 function add(a,b) {
-    return a+b;
+    return +a + +b;
 }
 
 function subtract(a,b) {
-    return a-b;
+    return +a - +b;
 }
 
 function multiply(a,b) {
-    return a*b;
+    return +a * +b;
 }
 
 function divide(a,b) {
-    return a/b;
+    return +a / +b;
 }
 
 function operate(operator, num1, num2) {
+ 
     if (operator === '+')
-        add(num1,num2);
+        return add(num1,num2);
     else if (operator === '-')
-        subtract(num1,num2);
+        return subtract(num1,num2);
     else if (operator === '*')
-        multiply(num1,num2);
+        return multiply(num1,num2);
     else if (operator === '/')
-        divide(num1,num2);
+        return divide(num1,num2);
 }
 
 
@@ -36,14 +37,32 @@ let displayNumbers = document.getElementById('display-numbers');
 
 // try by array -- receive button text, put text into array, pass on to next function to print, next function takes in array, shows array elements as a string //
 
-let numberArray = [];
-let number;
+let numberArray1 = [];
+let numberArray2 = [];
+let number1;
+let number2;
+let operator;
 let result;
-let btns = document.querySelectorAll('button');
-btns.forEach((btn) => btn.addEventListener("click", makeNumberArray));
 
-// let btnsOperators = document.querySelectorAll('button.operators');
-// btnsOperators.forEach((btn) => btn.addEventListener('click', takeOperator));
+let btnsOperators = document.querySelectorAll('button.operators');
+btnsOperators.forEach((btn) => btn.addEventListener('click', takeOperator));
+
+let btnNumbers = document.querySelectorAll('button.numbers');
+btnNumbers.forEach((btn) => btn.addEventListener("click", makeNumberArray));
+
+let equalBtn = document.querySelector('#equals-button');
+equalBtn.addEventListener('click', doOperate);
+
+function doOperate() {
+    console.log(result);
+    result = operate(operator, number1, number2);
+    console.log(result);
+    displayNumbers.innerHTML = result;
+}
+
+
+
+
 
 // function(e) {
     
@@ -58,21 +77,36 @@ btns.forEach((btn) => btn.addEventListener("click", makeNumberArray));
 
 
 function makeNumberArray(e) { // takes in button content and put into array
-    console.log(numberArray);
-    numberArray.push(e.target.textContent);   
-    console.log(numberArray);
-    showNumber();
+    console.log(operator);
+    if (operator === undefined) {
+        console.log(numberArray1);
+        numberArray1.push(e.target.textContent); 
+        console.log(numberArray1);
+        showNumber();
+    } else { 
+        console.log(numberArray2);
+        numberArray2.push(e.target.textContent); 
+        console.log(numberArray2);
+        showNumber();
+    }
 }
 
 function showNumber() { //change array into string and print on display
-    console.log(number);
-    number = numberArray.join('');
-    displayNumbers.innerHTML = number;
-    console.log(number);
+    if (operator === undefined) {
+        console.log(number1);
+        number1 = numberArray1.join('');
+        displayNumbers.innerHTML = number1;
+        console.log(number1);
+    } else {
+        console.log(number2);
+        number2 = numberArray2.join('');
+        displayNumbers.innerHTML = number2;
+        console.log(number2);
+    }
 }
 
 function takeOperator(e) {
-
+    operator = e.target.textContent;
 }
 
 
