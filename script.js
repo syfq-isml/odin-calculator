@@ -1,18 +1,27 @@
 function add(a,b) {
-    return +a + +b;
+    return round(+a + +b,2);
 }
 
 function subtract(a,b) {
-    return +a - +b;
+    return round(+a - +b, 2);
 }
 
 function multiply(a,b) {
-    return +a * +b;
+    return round(+a * +b, 2);
 }
 
 function divide(a,b) {
-    return +a / +b;
+    if (+b === 0) {
+        alert("Don't try to be funny...");
+        return round(+a/1);
+    }
+    else return round(+a / +b, 2);
 }
+
+function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+  }
 
 function operate(operator, num1, num2) {
  
@@ -43,6 +52,8 @@ let number1;
 let number2;
 let operator;
 let result;
+let pressedRecently = 'yes';
+let onEquals = '';
 
 let btnsOperators = document.querySelectorAll('button.operators');
 btnsOperators.forEach((btn) => btn.addEventListener('click', takeOperator));
@@ -51,20 +62,53 @@ let btnNumbers = document.querySelectorAll('button.numbers');
 btnNumbers.forEach((btn) => btn.addEventListener("click", makeNumberArray));
 
 let equalBtn = document.querySelector('#equals-button');
-equalBtn.addEventListener('click', doOperate);
+equalBtn.addEventListener('click', doOperateEquals);
 
 let clrBtn = document.querySelector('#clear-button');
-clrBtn.addEventListener('click', clearDisplay)
+clrBtn.addEventListener('click', clearDisplay);
+
+function doOperateEquals() {
+    if (pressedRecently === 'yes') return;
+
+    if (result === undefined) {
+        console.log(result);
+        result = operate(operator, number1, number2);
+        console.log(result);
+        displayNumbers.innerHTML = result;
+        numberArray2 = [];
+        pressedRecently = 'yes';
+    } else {
+        result = operate(operator, result, number2);
+        displayNumbers.innerHTML = result;
+        numberArray2 = [];
+        pressedRecently = 'yes';
+    }
+    
+}
 
 function doOperate() {
-    console.log(result);
-    result = operate(operator, number1, number2);
-    console.log(result);
-    displayNumbers.innerHTML = result;
+    if (pressedRecently === 'yes') return;
+
+    if (result === undefined) {
+        console.log(result);
+        result = operate(operator, number1, number2);
+        console.log(result);
+        displayNumbers.innerHTML = result;
+        numberArray2 = [];
+        pressedRecently = 'no';
+        return;
+    } else {
+        result = operate(operator, result, number2);
+        displayNumbers.innerHTML = result;
+        numberArray2 = [];
+        pressedRecently = 'no';
+    }
 }
 
 function makeNumberArray(e) { // takes in button content and put into array
     console.log(operator);
+    pressedRecently = 'no';
+
     if (operator === undefined) {
         console.log(numberArray1);
         numberArray1.push(e.target.textContent); 
@@ -76,21 +120,26 @@ function makeNumberArray(e) { // takes in button content and put into array
         console.log(numberArray2);
         showNumber();
     }
+    
 }
 
 function showNumber() { //change array into string and print on display
     
-    if (operator === undefined) {
-        console.log(number1);
-        number1 = numberArray1.join('');
-        displayNumbers.innerHTML = number1;
-        console.log(number1);
-    } else {
-        console.log(number2);
-        number2 = numberArray2.join('');
-        displayNumbers.innerHTML = number2;
-        console.log(number2);
-    }
+    // if (result === undefined) {
+        if (operator === undefined) {
+            console.log(number1);
+            number1 = numberArray1.join('');
+            displayNumbers.innerHTML = number1;
+            console.log(number1);
+        } else {
+            console.log(number2);
+            number2 = numberArray2.join('');
+            displayNumbers.innerHTML = number2;
+            console.log(number2);
+        }
+    // } else { 
+
+    // }
 }
 
 function takeOperator(e) {
@@ -99,17 +148,22 @@ function takeOperator(e) {
 
     operator = e.target.textContent;
 
+    //handles cases where operator now behaves like an equal
+    if (number2 !== undefined) {
+        doOperate();
+    }
     
 }
 
 function clearDisplay() {
- numberArray1 = [];
- numberArray2 = [];
- number1 = undefined;
- number2 = undefined;
- operator = undefined;
- result = undefined;
- displayNumbers.innerHTML = '';
+    pressedRecently = 'yes';
+    numberArray1 = [];
+    numberArray2 = [];
+    number1 = undefined;
+    number2 = undefined;
+    operator = undefined;
+    result = undefined;
+    displayNumbers.innerHTML = '';
 }
 
 /* PLANNING
