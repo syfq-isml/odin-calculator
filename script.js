@@ -53,28 +53,15 @@ btnNumbers.forEach((btn) => btn.addEventListener("click", makeNumberArray));
 let equalBtn = document.querySelector('#equals-button');
 equalBtn.addEventListener('click', doOperate);
 
+let clrBtn = document.querySelector('#clear-button');
+clrBtn.addEventListener('click', clearDisplay)
+
 function doOperate() {
     console.log(result);
     result = operate(operator, number1, number2);
     console.log(result);
     displayNumbers.innerHTML = result;
 }
-
-
-
-
-
-// function(e) {
-    
-//     if (e.target.className === 'numbers') makeNumberArray();
-//     else if (e.target.className === 'operators') console.log('Clicked operator');
-// }));
-
-// function categoriser(e) {
-//     if (e.target.className === 'numbers') makeNumberArray;
-//     else if (e.target.className === 'operators') console.log('Clicked operator');
-// }
-
 
 function makeNumberArray(e) { // takes in button content and put into array
     console.log(operator);
@@ -92,6 +79,7 @@ function makeNumberArray(e) { // takes in button content and put into array
 }
 
 function showNumber() { //change array into string and print on display
+    
     if (operator === undefined) {
         console.log(number1);
         number1 = numberArray1.join('');
@@ -106,9 +94,23 @@ function showNumber() { //change array into string and print on display
 }
 
 function takeOperator(e) {
+    //handle cases where operator is clicked before a number
+    if (number1 === undefined && number2 === undefined) return;
+
     operator = e.target.textContent;
+
+    
 }
 
+function clearDisplay() {
+ numberArray1 = [];
+ numberArray2 = [];
+ number1 = undefined;
+ number2 = undefined;
+ operator = undefined;
+ result = undefined;
+ displayNumbers.innerHTML = '';
+}
 
 /* PLANNING
 
