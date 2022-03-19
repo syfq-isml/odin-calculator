@@ -3,6 +3,6 @@
 
 
 #Future Implementations
-- [ ] limit amount of numbers
-- [ ] add decimal button
+- [x] limit amount of numbers
+- [x] add decimal button
 - [ ] add backspace button

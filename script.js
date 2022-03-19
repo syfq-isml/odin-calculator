@@ -55,6 +55,7 @@ let result;
 let pressedRecently = 'yes';
 let onEquals = '';
 
+
 let btnsOperators = document.querySelectorAll('button.operators');
 btnsOperators.forEach((btn) => btn.addEventListener('click', takeOperator));
 
@@ -67,8 +68,18 @@ equalBtn.addEventListener('click', doOperateEquals);
 let clrBtn = document.querySelector('#clear-button');
 clrBtn.addEventListener('click', clearDisplay);
 
+let decBtn = document.querySelector('#decimal-button');
+decBtn.addEventListener("click", addPoint);
+
+
+function addPoint(e) {
+    if (displayNumbers.innerHTML.includes('.')) return;
+    makeNumberArray(e);
+}
+
 function doOperateEquals() {
     if (pressedRecently === 'yes') return;
+    if (number1 === undefined || number2 === undefined) return;
 
     if (result === undefined) {
         console.log(result);
@@ -110,36 +121,24 @@ function makeNumberArray(e) { // takes in button content and put into array
     pressedRecently = 'no';
 
     if (operator === undefined) {
-        console.log(numberArray1);
+        if (numberArray1.length>9) return;
         numberArray1.push(e.target.textContent); 
-        console.log(numberArray1);
         showNumber();
     } else { 
-        console.log(numberArray2);
         numberArray2.push(e.target.textContent); 
-        console.log(numberArray2);
+        if (numberArray2.length>9) return;
         showNumber();
     }
-    
 }
 
 function showNumber() { //change array into string and print on display
-    
-    // if (result === undefined) {
-        if (operator === undefined) {
-            console.log(number1);
-            number1 = numberArray1.join('');
-            displayNumbers.innerHTML = number1;
-            console.log(number1);
-        } else {
-            console.log(number2);
-            number2 = numberArray2.join('');
-            displayNumbers.innerHTML = number2;
-            console.log(number2);
-        }
-    // } else { 
-
-    // }
+    if (operator === undefined) {
+        number1 = numberArray1.join('');
+        displayNumbers.innerHTML = number1;
+    } else {
+        number2 = numberArray2.join('');
+        displayNumbers.innerHTML = number2;
+    }
 }
 
 function takeOperator(e) {
