@@ -88,8 +88,16 @@ button {
     background-color: rgb(241, 181, 68);
 }
 
+.operators:hover {
+    background-color: rgb(212, 141, 8);
+}
+
 .numbers {
     background-color: rgb(116, 116, 241);
+}
+
+.numbers:hover {
+    background-color: rgb(68, 68, 240);
 }
 
 #clear-button {
@@ -99,12 +107,24 @@ button {
     margin-top: 2px;
 }
 
+#clear-button:hover {
+    background-color: rgb(228, 35, 35);
+}
+
 button:hover {
     cursor: pointer;
 }
 
-a {
-    text-decoration: none;
+#decimal-button, #equals-button {
+    background-color: aliceblue;
+}
+
+#decimal-button:hover, #equals-button:hover {
+    background-color: rgb(184, 194, 201);
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: antiquewhite;
 }
 
 
