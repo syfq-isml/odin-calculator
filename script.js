@@ -88,11 +88,13 @@ function doOperateEquals() {
         displayNumbers.innerHTML = result;
         numberArray2 = [];
         pressedRecently = 'yes';
+        onEquals = 'yes';
     } else {
         result = operate(operator, result, number2);
         displayNumbers.innerHTML = result;
         numberArray2 = [];
         pressedRecently = 'yes';
+        onEquals = 'yes';
     }
     
 }
@@ -114,10 +116,13 @@ function doOperate() {
         numberArray2 = [];
         pressedRecently = 'no';
     }
+
 }
 
 function makeNumberArray(e) { // takes in button content and put into array
-    console.log(operator);
+    if (onEquals === 'yes') {
+        clearDisplay();
+    }
     pressedRecently = 'no';
 
     if (operator === undefined) {
@@ -146,6 +151,7 @@ function takeOperator(e) {
     if (number1 === undefined && number2 === undefined) return;
 
     operator = e.target.textContent;
+    onEquals = 'no';
 
     //handles cases where operator now behaves like an equal
     if (number2 !== undefined) {
@@ -156,6 +162,7 @@ function takeOperator(e) {
 
 function clearDisplay() {
     pressedRecently = 'yes';
+    onEquals = '';
     numberArray1 = [];
     numberArray2 = [];
     number1 = undefined;

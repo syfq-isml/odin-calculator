@@ -3,9 +3,20 @@
 body, html {
     margin:0;
     padding:0;
-    min-height:100vh;
     background-color: rgb(48, 46, 46);
     font-family: 'Space Mono', monospace;
+}
+
+#page-wrapper {
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    min-height: 25px;
 }
 
 main {
@@ -16,15 +27,24 @@ main {
 }
 
 footer {
-    margin-top: auto;
     color: antiquewhite;
     text-align: center;
 }
 
+p {
+    padding: 0;
+    margin:0;
+}
+
+#button-container>div {
+    color:aliceblue;
+    margin-bottom: 5px;
+}
+
 #display-screen {
-    border: 1px solid rgb(173, 170, 170);
+    border: 3px solid rgb(173, 170, 170);
     width: 400px;
-    height: 15vh;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,12 +67,27 @@ footer {
 
 button {
     border-radius: 6px;
+    border: none;
     width: 30px;
     height: 30px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.operators {
+    background-color: rgb(241, 181, 68);
+}
+
+.numbers {
+    background-color: rgb(116, 116, 241);
 }
 
 #clear-button {
-    width: 60px;
+    width: 70px;
+    background-color: rgb(230, 79, 79);
+    color:aliceblue;
+    margin-top: 2px;
 }
 
 button:hover {
@@ -62,3 +97,5 @@ button:hover {
 a {
     text-decoration: none;
 }
+
+
