@@ -87,12 +87,14 @@ function doOperateEquals() {
         console.log(result);
         displayNumbers.innerHTML = result;
         numberArray2 = [];
+        number2 = undefined;
         pressedRecently = 'yes';
         onEquals = 'yes';
     } else {
         result = operate(operator, result, number2);
         displayNumbers.innerHTML = result;
         numberArray2 = [];
+        number2 = undefined;
         pressedRecently = 'yes';
         onEquals = 'yes';
     }
@@ -108,12 +110,14 @@ function doOperate() {
         console.log(result);
         displayNumbers.innerHTML = result;
         numberArray2 = [];
+        number2 = undefined;
         pressedRecently = 'no';
         return;
     } else {
         result = operate(operator, result, number2);
         displayNumbers.innerHTML = result;
         numberArray2 = [];
+        number2 = undefined;
         pressedRecently = 'no';
     }
 
